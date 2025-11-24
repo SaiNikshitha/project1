@@ -1,0 +1,20 @@
+//webhook
+pipeline {
+    agent any
+    triggers {
+        githubPush()
+    }
+    stages {
+        stage('Clone Repo') {
+            steps {
+              git branch: 'main', url:'https://github.com/ANUSHKAAPARSI/octYogitaJava'
+            }
+        }
+
+        stage('Build') {
+            steps {
+               sh '/opt/homebrew/Cellar/maven/3.9.11/bin/mvn clean package'
+            }
+        }
+    }
+}
